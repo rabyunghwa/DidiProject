@@ -4,13 +4,13 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.awesome.byunghwa.android.didiproject.MainActivity">
+    tools:context="com.awesome.byunghwa.android.didiproject.activity.MainActivity">
 
     <fragment
         android:id="@+id/fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.awesome.byunghwa.android.didiproject.MainActivityFragment"
+        android:name="com.awesome.byunghwa.android.didiproject.fragment.MainActivityFragment"
         tools:layout="@layout/fragment_main_activity" />
 
 </android.support.constraint.ConstraintLayout>
