@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.awesome.byunghwa.android.didiproject">
+    package="com.awesome.byunghwa.android.didiproject"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-sdk tools:overrideLibrary="android.support.v13"/>
 
     <application
         android:name=".application.Application"

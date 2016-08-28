@@ -1,8 +1,8 @@
 package com.awesome.byunghwa.android.didiproject.data;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.net.Uri;
-import android.support.v4.content.CursorLoader;
 
 import com.awesome.byunghwa.android.didiproject.utils.LogUtil;
 

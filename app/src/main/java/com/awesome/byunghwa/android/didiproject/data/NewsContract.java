@@ -49,17 +49,6 @@ public class NewsContract {
 		public static final String TYPE = "type";
 		/** Type: TEXT NOT NULL 足球，娱乐。。。分类*/
 
-
-//		/** Matches: /items/ */
-//		public static Uri buildDirUri(String newsType) {
-//			Uri.Builder builder = new Uri.Builder();
-//			builder.scheme("content")
-//					.authority(CONTENT_AUTHORITY)
-//					.appendPath(TABLE_NAME)
-//					.appendPath(newsType);
-//			return builder.build();
-//		}
-
 		public static Uri buildDirUri() {
 			return CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();
 		}

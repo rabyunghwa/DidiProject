@@ -6,6 +6,9 @@ import android.net.Uri;
 
 import com.awesome.byunghwa.android.didiproject.service.NewsUpdaterService;
 
+/**
+ * Created by ByungHwa on 8/21/2016.
+ */
 
 public class StartServiceUtil {
 
@@ -20,8 +23,8 @@ public class StartServiceUtil {
                 .authority("route.showapi.com")
                 .appendPath("109-35")
                 .appendQueryParameter("title", type)
-                .appendQueryParameter("showapi_appid", "")
-                .appendQueryParameter("showapi_sign", "");
+                .appendQueryParameter("showapi_appid", "23064")
+                .appendQueryParameter("showapi_sign", "cc973cf0b3404267b4544d5371875f12");
         return builder.build().toString();
     }
 

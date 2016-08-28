@@ -1,10 +1,10 @@
 package com.awesome.byunghwa.android.didiproject.fragment;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -170,7 +170,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFrag(new DummyFragment(), "国内焦点");
         adapter.addFrag(new DummyFragment(), "国际焦点");
         adapter.addFrag(new DummyFragment(), "军事焦点");

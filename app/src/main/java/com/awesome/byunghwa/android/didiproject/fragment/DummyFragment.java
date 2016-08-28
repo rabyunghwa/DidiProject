@@ -1,11 +1,14 @@
 package com.awesome.byunghwa.android.didiproject.fragment;
 
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -35,8 +38,16 @@ public class DummyFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private static final int MY_LOADER_ID_NEWS = 0;
     private NewsListRecyclerViewAdapter adapter;
 
+    private AppCompatActivity appCompatActivity;
+
     public DummyFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        appCompatActivity = (AppCompatActivity) activity;
     }
 
     @Override
@@ -66,8 +77,8 @@ public class DummyFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if (id == MY_LOADER_ID_NEWS) {
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        if (i == MY_LOADER_ID_NEWS) {
             String type = null;
             switch (MainActivityFragment.tabSelection) {
                 case 0:
@@ -108,42 +119,33 @@ public class DummyFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        LogUtil.log("DummyFrag", "cursor size: " + cursor.getCount());
+        mSwipeRefreshLayout.setRefreshing(false);
+        adapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        recyclerView.setAdapter(null);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         LogUtil.log("DummyFrag", "setUserVisibleHint getting called...");
         // we are initting/restarting loader here because this callback is guaranteed to
         // be called when the fragment is visible whereas onResume is not
-//        if (isVisibleToUser) {
-//            if (MainActivity.mActivityContext != null) {
-        LoaderManager loaderManager = getLoaderManager();
-        if (loaderManager != null) {
-            if (loaderManager.getLoader(MY_LOADER_ID_NEWS) == null) {
-                loaderManager.initLoader(MY_LOADER_ID_NEWS, null, this);
-            } else {
-                loaderManager.restartLoader(MY_LOADER_ID_NEWS, null, this);
+        if (appCompatActivity != null) {
+            if (appCompatActivity.getLoaderManager() != null) {
+                if (appCompatActivity.getLoaderManager().getLoader(MY_LOADER_ID_NEWS) == null) {
+                    appCompatActivity.getLoaderManager().initLoader(MY_LOADER_ID_NEWS, null, this);
+                } else {
+                    appCompatActivity.getLoaderManager().restartLoader(MY_LOADER_ID_NEWS, null, this);
+                }
             }
         }
-//                if (getLoaderManager().getLoader(MY_LOADER_ID_NEWS) == null) {
-//                    getLoaderManager().initLoader(MY_LOADER_ID_NEWS, null, this);
-//                } else {
-//                    getLoaderManager().restartLoader(MY_LOADER_ID_NEWS, null, this);
-//                }
-//            }
 
-//        }
-
-    }
-
-    @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        LogUtil.log("DummyFrag", "cursor size: " + data.getCount());
-        mSwipeRefreshLayout.setRefreshing(false);
-        adapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-        recyclerView.setAdapter(null);
     }
 
     @Override
